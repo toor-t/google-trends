@@ -1,15 +1,15 @@
 // Google Trends interestByRegion
-const googleTrends = require('google-trends-api');
+import * as googleTrends from 'google-trends-api';
 
 if (process.argv.length < 3) {
 	console.log(`usage: ${process.argv[0].replace(/^.*[\\\/]/, '')} ${process.argv[1].replace(/^.*[\\\/]/, '')} <keyWord>`);
 }
 else {
-	const keyWord = process.argv[2];
+	const keyWord = process.argv.slice(2);
 
 	console.log(`keyWord = ${keyWord}`)
 
-	googleTrends.interestByRegion({ keyword: keyWord, geo: 'JP', hl: 'ja', startTime: new Date('2019-01-01') })
+	googleTrends.interestByRegion({ keyword: keyWord, geo: 'JP', hl: 'ja' })
 		.then((results: string) => {
 			const ret = JSON.parse(results);
 			// console.log('These results are awesome', results);
