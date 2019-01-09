@@ -1,4 +1,4 @@
-// Google Trends interestByRegion
+// Google Trends autoComplete
 const googleTrends = require('google-trends-api');
 
 if (process.argv.length < 3) {
@@ -9,16 +9,16 @@ else {
 
 	console.log(`keyWord = ${keyWord}`)
 
-	googleTrends.interestByRegion({ keyword: keyWord, geo: 'JP', hl: 'ja', startTime: new Date('2019-01-01') })
+	googleTrends.interestOverTime({ keyword: keyWord, geo: 'JP', hl: 'ja' })
 		.then((results: string) => {
 			const ret = JSON.parse(results);
 			// console.log('These results are awesome', results);
-			const geoMapData = ret.default.geoMapData;
-			for (const index in geoMapData) {
-				const data = geoMapData[index];
+			const timelineData = ret.default.timelineData;
+			for (const index in timelineData) {
+				const data = timelineData[index];
 				// console.log(data);
 				if (data.hasData[0] === true) {
-					console.log(`  ${data.geoName} = ${data.formattedValue}`);
+					console.log(`  ${data.formattedTime} = ${data.formattedValue}`);
 				}
 			}
 		})
