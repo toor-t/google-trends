@@ -1,2 +1,4 @@
 # google-trends
-Google trends API の実験
+
+Google trends API の実験。
+
